@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" href="style.css">
+		<script
+		src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
+		<script crossorigin="anonymous" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	</head>
+
+	<body>
+		<audio id="audio">	</audio>
+
+		<div class="window">
+			<div class="header"></div>
+
+			<div class="container">
+				<span id="artist">Bladee</span><br>
+				<span id="title">Hero of My Story 3style3</span><br>
+				<div class="released">song released on <span id="released">2020-1-20</span></div>
+
+				<progress id="volume" value="20" max="100"></progress>
+				<br>
+				<progress value="70" max="100" id="progress">70 %</progress>
+
+				<button id="control">play</button>
+
+				<div class="listeners">Listening with <span id="listeners">2</span> other people!</div>
+
+			</div>
+		</div>
+
+		<script src="main.js"></script>
+	</body>
+</html>

@@ -45,7 +45,6 @@ const releasedElement = document.getElementById("released");
 
 let song;
 
-
 ws.addEventListener("message", async ev => {
 	if(ev.data.startsWith("//")) {
 		console.log('[SERVER] ' + ev.data)
@@ -54,7 +53,6 @@ ws.addEventListener("message", async ev => {
 
 	const data = JSON.parse(ev.data);
 
-	console.log(data);
 
 	if(data.type == "listeners") {
 		listenerElement.innerText = data.count;

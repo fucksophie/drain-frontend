@@ -10,7 +10,7 @@ html {
 	text-align: center;
 	background: rgb(255,188,217);
 	background: linear-gradient(29deg, rgba(255,188,217,1) 28%, rgba(0,212,255,1) 100%);
-	width: 300px;
+	word-break: break-all;
 }
 
 .window .header {
@@ -27,8 +27,7 @@ html {
 	font-size: 15px;
 }
 .container {
-	padding-bottom: 50px;
-	padding-top: 30px;
+	padding-top: 10px;
 }
 .listeners {
 	position: absolute;

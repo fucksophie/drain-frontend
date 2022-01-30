@@ -46,17 +46,9 @@ const releasedElement = document.getElementById("released");
 let song;
 
 ws.addEventListener("message", async ev => {
-	if(ev.data.startsWith("//")) {
-		console.log('[SERVER] ' + ev.data)
-		return;
-	}
-
 	const data = JSON.parse(ev.data);
 
-
-	if(data.type == "listeners") {
-		listenerElement.innerText = data.count;
-	}
+	if(data.type == "listeners") listenerElement.innerText = data.count;
 
 	if(data.type == "song") {
 		audioElement.src = backend.replace("ws", "http")+"/"+data.song.file;
@@ -84,5 +76,27 @@ ws.addEventListener("message", async ev => {
 			console.log("Out of sync!!")
 			audioElement.currentTime = data.playingFor/1000;
 		}
+	}
+
+	if(data.type == "window") {
+		const windowElement = document.createElement('div');
+		windowElement.style.width = data.width + "px";
+
+		windowElement.style.height = data.height + "px";
+		windowElement.className = "window";
+
+		const headerElement = document.createElement('div');
+		headerElement.className = "header";
+
+		windowElement.appendChild(headerElement);
+		const containerElement = document.createElement("container");
+
+		containerElement.innerHTML = data.container;
+		containerElement.className = "container";
+
+		windowElement.appendChild(containerElement);
+		document.body.appendChild(windowElement);
+
+		$( ".window" ).draggable({ handle: ".header" });
 	}
 })

@@ -4,12 +4,16 @@ html {
 	font-family: 'Heebo', sans-serif;
 	background-color: #23272a;
 }
-
+:root {
+	--main: #d73d6c;
+	--accent: #65b2c6;
+	--additive: #d57276;
+}
 .window {
 	color: white;
 	text-align: center;
-	background: rgb(255,188,217);
-	background: linear-gradient(29deg, rgba(255,188,217,1) 28%, rgba(0,212,255,1) 100%);
+	background: var(--main);
+	background: linear-gradient(29deg, var(--main) 28%, var(--accent) 100%);
 	word-break: break-all;
 }
 
@@ -17,15 +21,18 @@ html {
 	background-color: black;
 	opacity: 0.25;
 	height: 10px;
+	position:sticky;
+	top: 0;
 }
 #artist {
-	text-shadow: -2px 2px rgba(255,188,217,1), 
-	-4px 4px #f48fb1, 
-	-6px 6px #7e57c2;
+	text-shadow: -2px 2px var(--main) 
+	-4px 4px var(--accent), 
+	-6px 6px var(--additive);
 }
 #title {
 	font-size: 15px;
 }
+
 .container {
 	padding-top: 10px;
 }

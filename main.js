@@ -42,8 +42,10 @@ const titleElement = document.getElementById("title");
 const progressElement = document.getElementById("progress");
 const releasedClassElement = document.querySelector(".released");
 const releasedElement = document.getElementById("released");
+const playlistElement = document.getElementById("playlist");
 
 let song;
+let playlist;
 
 ws.addEventListener("message", async ev => {
 	const data = JSON.parse(ev.data);
@@ -55,12 +57,19 @@ ws.addEventListener("message", async ev => {
 		audioElement.currentTime = data.playingFor/1000;
 		artistElement.innerText = data.song.artist;
 		titleElement.innerText = data.song.title;
-		if(song) audioElement.play(); // doesn't autoplay if we replace the src
+		
+		if(song) {
+			if(!audioElement.paused) audioElement.play();
+
+			document.getElementById(song.file).style.color = "";
+		}
 
 		song = data.song;
+
+		document.getElementById(song.file).style.color = "yellow";
+		
 		if(song.date) {
 			releasedClassElement.style.visibility = "visible";
-			
 			releasedElement.innerText = song.date;
 		} else {
 			releasedClassElement.style.visibility = "hidden";
@@ -76,6 +85,17 @@ ws.addEventListener("message", async ev => {
 			console.log("Out of sync!!")
 			audioElement.currentTime = data.playingFor/1000;
 		}
+	}
+
+	if(data.type == "playlist") {
+		playlist = data.playlist;
+	
+		playlist.forEach(song => {
+			const songElement = document.createElement("li");
+			songElement.innerText = song.artist + " - " + song.title;
+			songElement.id = song.file;
+			playlistElement.appendChild(songElement);
+		})
 	}
 
 	if(data.type == "window") {

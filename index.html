@@ -11,9 +11,7 @@
 	</head>
 
 	<body>
-		<audio id="audio">	</audio>
-
-		<div class="window" style="width: 400px;height: 190px">
+		<div class="window" style="width:400px;height:190px;position:absolute;left:471px;top:83.9896px;">
 			<div class="header"></div>
 
 			<div class="container">
@@ -23,7 +21,7 @@
 
 				<progress id="volume" value="20" max="100"></progress>
 				<br>
-				<progress value="70" max="100" id="progress">70 %</progress>
+				<progress value="70" max="100" id="progress"></progress>
 				<br>
 				<button id="control">play</button>
 
@@ -31,6 +29,14 @@
 
 			</div>
 		</div>
+
+		<div class="window" style="height: 450px;width: 450px;">
+			<div class="header"></div>
+
+			<ol class="container" id="playlist" style="padding-top:0;overflow: auto;max-height: 400px;max-width: 450px;"></ol>
+		</div>	
+
+		<audio id="audio"></audio>
 
 		<script src="main.js"></script>
 	</body>

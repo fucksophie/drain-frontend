@@ -21,6 +21,7 @@ const playlistElement = document.getElementById("playlist");
 
 let song;
 let playlist;
+let paused = true;
 
 audioElement.volume = volumeBar.value/100;
 
@@ -56,7 +57,7 @@ ws.addEventListener("message", async ev => {
 		titleElement.innerText = data.song.title;
 		
 		if(song) {
-			if(!audioElement.paused) audioElement.play();
+			if(!paused) audioElement.play();
 
 			document.getElementById(song.file).style.color = "";
 		}
@@ -98,9 +99,11 @@ ws.addEventListener("message", async ev => {
 controlElement.addEventListener('click', () => {
 	if(audioElement.paused) {
 		audioElement.play();
+		paused = false;
 		controlElement.innerText = 'pause';
 	} else {
 		audioElement.pause()
+		paused = true;
 		controlElement.innerText = 'play';
 	}
 })

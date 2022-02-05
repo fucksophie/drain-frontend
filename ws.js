@@ -1,5 +1,3 @@
-$( ".window" ).draggable({ handle: ".header" });
-
 const backend = location.hostname === "localhost" 
 			|| location.hostname === "127.0.0.1" ? 
 		"ws://localhost:3000" : 
@@ -7,64 +5,39 @@ const backend = location.hostname === "localhost"
 
 const ws = new WebSocket(`${backend}/ws`);
 
-const volumeBar = document.getElementById("volume");
-const audioElement = document.getElementById("audio");
-const controlElement = document.getElementById("control");
 const listenerElement = document.getElementById("listeners");
 const artistElement = document.getElementById("artist");
-const titleElement = document.getElementById("title");
-
 const progressElement = document.getElementById("progress");
-const releasedClassElement = document.querySelector(".released");
-const releasedElement = document.getElementById("released");
 const playlistElement = document.getElementById("playlist");
+const releasedElement = document.getElementById("released");
+
+const releasedClassElement = document.querySelector(".released");
 
 let song;
 let playlist;
-let paused = true;
-
-audioElement.volume = volumeBar.value/100;
-
-if(localStorage.getItem("volume")) {
-	audioElement.volume = localStorage.getItem("volume")/100;
-	volumeBar.value = localStorage.getItem("volume");
-}
-
-volumeBar.addEventListener('click', function (e) {
-    var value_clicked = e.offsetX * this.max / this.offsetWidth;
-    this.value = value_clicked;
-	audioElement.volume = value_clicked/100;
-
-	localStorage.setItem("volume", value_clicked);
-});
 
 ws.addEventListener("message", async ev => {
 	const data = JSON.parse(ev.data);
 
-	if(data.type == "listeners") {
-		if(data.count == 1) {
-			listenerElement.innerText = "1 listener"
-		} else {
-			listenerElement.innerText = data.count + " listeners"
-		}
-	}
+	if(data.type == "listeners") listenerElement.innerText = data.count === 1 ? "1 listener" : data.count + " listeners"; 
 
 	if(data.type == "song") {
 		audioElement.src = backend.replace("ws", "http") + "/" + data.song.file;
 
-		audioElement.currentTime = data.playingFor / 1000;
 		artistElement.innerText = data.song.artist;
 		titleElement.innerText = data.song.title;
 		
+		audioElement.currentTime = data.playingFor / 1000;
+		
 		if(song) {
-			if(!paused) audioElement.play();
+			if(!window.paused) audioElement.play();
 
 			document.getElementById(song.file).style.color = "";
 		}
 
 		song = data.song;
 
-		document.getElementById(song.file).style.color = "yellow";
+		document.getElementById(song.file).style.color = "#dcdcdc";
 		
 		if(song.date) {
 			releasedClassElement.style.visibility = "visible";
@@ -93,17 +66,5 @@ ws.addEventListener("message", async ev => {
 
 			playlistElement.appendChild(songElement);
 		})
-	}
-})
-
-controlElement.addEventListener('click', () => {
-	if(audioElement.paused) {
-		audioElement.play();
-		paused = false;
-		controlElement.innerText = 'pause';
-	} else {
-		audioElement.pause()
-		paused = true;
-		controlElement.innerText = 'play';
 	}
 })

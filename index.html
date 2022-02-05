@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
+		<title>yourfriend's Radio</title>
 		<link rel="stylesheet" href="style.css">
-		<script
-		src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-		crossorigin="anonymous"></script>
-		<script crossorigin="anonymous" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	</head>
 
 	<body>
@@ -15,18 +15,19 @@
 			<div class="header"></div>
 
 			<div class="container">
-				<span id="artist">Bladee</span><br>
-				<span id="title">Hero of My Story 3style3</span><br>
-				<div class="released">song released on <span id="released">2020-1-20</span></div>
+				<p id="artist"></p>
+				<p id="title"></p>
 
-				<progress id="volume" value="20" max="100"></progress>
-				<br>
-				<progress value="70" max="100" id="progress"></progress>
-				<br>
+				<progress id="volume" value="20" max="100"></progress><br>
+				<progress value="70" max="100" id="progress"></progress><br>
+
 				<button id="control">play</button>
+		
+				<p class="released">
+					song released on <span id="released"></span>
+				</p>
 
 				<div id="listeners"></div>
-
 			</div>
 		</div>
 
@@ -36,8 +37,20 @@
 			<ol class="container" id="playlist" style="padding-top:0;overflow: auto;max-height: 400px;max-width: 450px;"></ol>
 		</div>	
 
+		<div class="corner">
+			<a style="font-size: 5vw;color:white;" href="https://discord.gg/Nu3U5Saz" target="_blank" rel="noopener">
+				💬
+			</a>
+
+			<a style="font-size: 5vw;" href="https://yourfriend.lv" target="_blank" rel="noopener">
+				💈
+			</a>
+		</div>
+		
 		<audio id="audio"></audio>
 
-		<script src="main.js"></script>
+		<script src="index.js"></script>
+		
+		<script src="ws.js"></script>
 	</body>
 </html>

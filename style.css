@@ -9,6 +9,15 @@ html {
 	--accent: #65b2c6;
 	--additive: #d57276;
 }
+p {
+	margin: 0;
+	padding: 0;
+}
+.corner {
+	right: 5px;
+	bottom: 0;
+	position: absolute;
+}
 .window {
 	color: white;
 	text-align: center;
@@ -16,7 +25,9 @@ html {
 	background: linear-gradient(29deg, var(--main) 28%, var(--accent) 100%);
 	word-break: break-all;
 }
-
+:-webkit-any-link {
+	text-decoration: none;
+}
 .window .header {
 	background-color: black;
 	opacity: 0.25;
